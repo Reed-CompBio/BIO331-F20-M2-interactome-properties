@@ -1,10 +1,11 @@
 # Module 2: Interactome Properties
 
-In this homework, you will first implement network measures, then compare these measures across different yeast interactomes, and finally compare these measures across interactomes from yeast, human, and fly.
+In this homework, you will first implement network measures, then compare these measures across different yeast interactomes, and finally compare these measures across interactomes from yeast, human, and fly.  All graphs are undirected and unweighted.  Note that the Written Assignment asks you to compare interactomes and provide figures.
 
 * **Assignment Out:** Monday, Sept 14
 * **Assignment Due:** Monday, Sept 28
-* **Suggested Deadlines:**  Note that the Written Assignment asks you to compare interactomes and provide figures.
+
+### Suggested Deadlines
 
 :arrow_right: Friday, Sept 18 -- implement most of the network measures
 
@@ -12,7 +13,7 @@ In this homework, you will first implement network measures, then compare these 
 
 :arrow_right: Thursday, Sept 24 -- compare measures across yeast, human, and fly
 
-## :star: **Task A**: Software Preliminaries: `matplotlib`
+## :star: **Task A**: `matplotlib` Preliminaries
 
 `Matplotlib` is a plotting and visualization library for Python.  The `plot_graph.py` file contains a single function, which plots some numbers.  To see if you have it installed on your machine, try running `plot_graph.py`.  If it is not installed, try installing it in the same way you installed `graphspace_python`.  For example, you can open a Terminal (Mac) or Anaconda Command Prompt (for those using Anaconda as the package manager) and type:
 
@@ -33,16 +34,70 @@ When you run `plot_graph.py`, a new file, `numbers.png` is created in the same d
 | `m` - magenta | | `x` - x marker |
 | `c` - cyan |  | `d` - diamond |
 | `k` - black |  | `*` - star|
-
+`
 ## :star: **Task B**: Calculate and Plot Degree Distribution
 
-For Tasks B-E, work with the provided `example_graph.txt`.  
+For Tasks B-E, work with the provided `graph1.txt` and `graph2.txt`, which are both files of edge lists.  Each task in B-E produces **one** figure (e.g. one `.png` file) with both lines displayed on it.
 
-## :star: **Task C**: Calculate and Plot Average Neighbor Degree
+Tasks F-G will ask you to run your code on other files of the same format, so consider this when writing your code for the earlier tasks. **Before you start each task, think carefully about what you need for the calculation and break the task down into smaller steps if necessary.**
 
-## :star: **Task D**: Calculate and Plot Clustering Coefficient
+First, write a `read_edge_file()` function that takes a filename (as a string) and returns an edge list (and any other data structures you find useful, like an adjacency matrix or an adjacency list).  For each network, print the number of nodes `n`, the number of edges `m`, and the average node degree of the network: `2m/n`.
 
-## :star: **Task E**: Calculate and Plot Path Length Distribution
+Next, calculate and plot the degree distribution. This is a **histogram** of node degrees for each network, where the x-axis contains the degree `k` and the y-axis contains the number of nodes that have degree `k`.  Use the `plt.plot()` function from `matplotlib`, so think first about what your `x` and `y` lists should look like.  You can plot multiple lines on the same figure by calling `plt.plot()` multiple times:
+```
+...
+plt.plot([1,2,3,4,5],[1,1,1,1,1],'r*')
+plt.plot([1,1,1,1,1],[1,2,3,4,5],'-b')
+...
+```
+
+_Code Structure Suggestion 1_:
+
+You will be running the same functions on all five networks and plotting all five datasets on the \textit{same} figure, so think about how your program will be structured.  You may want to keep a list of the file names and the dataset names that you can iterate over, e.g.,
+
+```
+def main():
+  names = ['Example1','Example2']
+  files = ['example1.txt','example2.txt']
+
+  for i in range(len(names)):
+    print('DATASET:',names[i])
+    print('READING FILE:',files[i])
+    ...
+
+```
+
+_Code Structure Suggestion 2_:
+
+You will be calculating histograms for many of these tasks.  For each measure, suppose you have a dictionary of (key,value) pairs where the keys are the nodes and the values are the statistic (here, degree distribution of that node).  You can write a `generate_hist()` function to take a dictionary like this and returns the lists `x` and `y` that are passed to `plt.plot()` functions.
+
+
+
+## :star: **Task C**: Calculate and Plot (Average) Average Neighbor Degree
+
+First, compute the average neighbor degree (AND) for each node <img src="https://render.githubusercontent.com/render/math?math=v \in V">:
+
+<img src="https://render.githubusercontent.com/render/math?math=\Large \frac{1}{d_v} \sum_{u \in N_v} d_u,">
+
+where <img src="https://render.githubusercontent.com/render/math?math=d_v"> is the degree of node <img src="https://render.githubusercontent.com/render/math?math=v"> and <img src="https://render.githubusercontent.com/render/math?math=N_v"> is the set of <img src="https://render.githubusercontent.com/render/math?math=v">'s neighbors.
+
+Next, plot the **average** AND for each degree `k`. The x-axis contains the degree `k` and the y-axis contains the average AND value for all nodes with degree `k`.  There should be a single y-value for each x-value plotted.
+
+## :star: **Task D**: Calculate and Plot (Average) Clustering Coefficient
+
+First, compute the clustering coefficient (CC) for each node <img src="https://render.githubusercontent.com/render/math?math=v \in V">:
+
+<img src="https://render.githubusercontent.com/render/math?math=\huge \frac{2 E_v}{d_v(d_v-1)},">
+
+where <img src="https://render.githubusercontent.com/render/math?math=d_v"> is the degree of node <img src="https://render.githubusercontent.com/render/math?math=v"> and <img src="https://render.githubusercontent.com/render/math?math=E_v"> is the number of edges between <img src="https://render.githubusercontent.com/render/math?math=v">'s neighbors.
+
+Next, plot the **average** CC for each degree `k`. The x-axis contains the degree `k` and the y-axis contains the average CC value for all nodes with degree `k`.  There should be a single y-value for each x-value plotted.
+
+## :star: **Task E**: Calculate and Plot Shortest Path Length Distribution
+
+:arrow_right: In Lab 3, you will implement the algorithm for computing the shortest paths from a node `v` to all other nodes in an undirected, unweighted graph.  Use the Lab 3 code for this task.
+
+Calculate the shortest path lengths between all pairs of nodes in each network, and plot a histogram of these path lengths.  The x-axis contains the path length `l` and the y-axis contains the number of node pairs that are connected by a path of length `l`.  Note that in this histogram we are counting _pairs_ of nodes, rather than nodes.
 
 ## :star: **Task F**: Compare Measures Across Yeast interactomes
 
