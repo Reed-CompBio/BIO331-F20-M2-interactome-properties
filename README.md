@@ -23,21 +23,27 @@ pip install matplotlib
 
 Remember you can preface the command with `sudo` if you get permissions errors.  Ask Anna if you have issues installing `matplotlib`.  
 
-When you run `plot_graph.py`, a new file, `numbers.png` is created in the same directory in which you are running the code.  Opening this file shows a two-panel figure with one red curve and one blue curve.  Find the place in `plot_graph.py` where you can modify the colors, line styles, and markers.  A subset of the [colors](https://matplotlib.org/3.1.0/gallery/color/named_colors.html), [marker styles](https://matplotlib.org/3.3.1/api/markers_api.html), [line styles](https://matplotlib.org/3.2.1/gallery/lines_bars_and_markers/linestyles.html), for the `plot()` function are below.  They are passed as a single string, e.g., `'ro-'` is a red line with circle markers.  Order does not matter.
+When you run `plot_graph.py`, a new file, `numbers.png` is created in the same directory in which you are running the code.  Opening this file shows a two-panel figure with one red curve and one blue curve:
+
+![some numbers](figs/numbers.png)
+
+Find the place in `plot_graph.py` where you can modify the colors, line styles, and markers.  A subset of the [colors](https://matplotlib.org/3.1.0/gallery/color/named_colors.html), [marker styles](https://matplotlib.org/3.3.1/api/markers_api.html), [line styles](https://matplotlib.org/3.2.1/gallery/lines_bars_and_markers/linestyles.html), for the `plot()` function are below.  They are passed as a single string, e.g., `'ro-'` is a red line with circle markers.  Order does not matter.
 
 | Colors | Line Styles | Line Markers |
 | -- | -- | -- |
-| `r` - red | `-` - solid | o - circle|
-| `g` - green | `- -` - dashed | `.` - point |
-| `b` - blue | `-.` - dash-dot | `s` - square |
-| `y` - yellow | `:` - dotted | `+` - plus |
-| `m` - magenta | | `x` - x marker |
-| `c` - cyan |  | `d` - diamond |
-| `k` - black |  | `*` - star|
-`
+| `r` red | `-` solid | `o` circle|
+| `g` green | `--` dashed | `.` point |
+| `b` blue | `-.` dash-dot | `s` square |
+| `y` yellow | `:` dotted | `+` plus |
+| `m` magenta | | `x` x marker |
+| `c` cyan |  | `d` diamond |
+| `k` black |  | `*` star|
+
+Modify the line styles in the two subpanels.
+
 ## :star: **Task B**: Calculate and Plot Degree Distribution
 
-For Tasks B-E, work with the provided `graph1.txt` and `graph2.txt`, which are both files of edge lists.  Each task in B-E produces **one** figure (e.g. one `.png` file) with both lines displayed on it.
+Write your code in the `run.py` file, copying functions from `plot_graph.py` as necessary.  For Tasks B-E, work with the provided `graph1.txt` and `graph2.txt`, which are both files of edge lists.  Each task in B-E produces **one** figure (e.g. one `.png` file) with both lines displayed on it.  Alternatively, you can choose to make a large figure with **one** subpanel for each task.
 
 Tasks F-G will ask you to run your code on other files of the same format, so consider this when writing your code for the earlier tasks. **Before you start each task, think carefully about what you need for the calculation and break the task down into smaller steps if necessary.**
 
@@ -45,15 +51,13 @@ First, write a `read_edge_file()` function that takes a filename (as a string) a
 
 Next, calculate and plot the degree distribution. This is a **histogram** of node degrees for each network, where the x-axis contains the degree `k` and the y-axis contains the number of nodes that have degree `k`.  Use the `plt.plot()` function from `matplotlib`, so think first about what your `x` and `y` lists should look like.  You can plot multiple lines on the same figure by calling `plt.plot()` multiple times:
 ```
-...
 plt.plot([1,2,3,4,5],[1,1,1,1,1],'r*')
 plt.plot([1,1,1,1,1],[1,2,3,4,5],'-b')
-...
 ```
 
 _Code Structure Suggestion 1_:
 
-You will be running the same functions on all five networks and plotting all five datasets on the \textit{same} figure, so think about how your program will be structured.  You may want to keep a list of the file names and the dataset names that you can iterate over, e.g.,
+You will be running the same functions on multiple files and plotting all data on the same figure, so think about how your program will be structured.  You may want to keep a list of the file names and the dataset names that you can iterate over, e.g.,
 
 ```
 def main():
@@ -70,8 +74,6 @@ def main():
 _Code Structure Suggestion 2_:
 
 You will be calculating histograms for many of these tasks.  For each measure, suppose you have a dictionary of (key,value) pairs where the keys are the nodes and the values are the statistic (here, degree distribution of that node).  You can write a `generate_hist()` function to take a dictionary like this and returns the lists `x` and `y` that are passed to `plt.plot()` functions.
-
-
 
 ## :star: **Task C**: Calculate and Plot (Average) Average Neighbor Degree
 
@@ -95,17 +97,39 @@ Next, plot the **average** CC for each degree `k`. The x-axis contains the degre
 
 ## :star: **Task E**: Calculate and Plot Shortest Path Length Distribution
 
-:arrow_right: In Lab 3, you will implement the algorithm for computing the shortest paths from a node `v` to all other nodes in an undirected, unweighted graph.  Use the Lab 3 code for this task.
+:arrow_right: In [Lab 3](https://github.com/Reed-CompBio/BIO331-F20-Lab3-shortest-paths), you will implement the algorithm for computing the shortest paths from a node `v` to all other nodes in an undirected, unweighted graph.  Use the Lab 3 code for this task.
 
 Calculate the shortest path lengths between all pairs of nodes in each network, and plot a histogram of these path lengths.  The x-axis contains the path length `l` and the y-axis contains the number of node pairs that are connected by a path of length `l`.  Note that in this histogram we are counting _pairs_ of nodes, rather than nodes.
 
 ## :star: **Task F**: Compare Measures Across Yeast interactomes
 
+For the next two tasks, you will generate figures for different groups of interactomes.  Your code should be able to reproduce the figures for the example graphs, Task F, and Task G by uncommenting certain lines in your program. Add comments that describe how to run all three examples.
+
+Generate the plots in Tasks B-E for the following five yeast networks.  The first three networks are from the Yu et al. paper we discussed in class, and two networks from the more recent BioGRID database.
+- `Yeast_Y2H_Union.txt` - union of three screens from Yu et al.
+- `Yeast_Combined_APMS.txt` - co-complex membership interactions from Yu et al.
+- `Yeast_LC_Multiple.txt` - literature-curated interactions from Yu et al.
+- `BioGRID_Y2H.txt` - all unique two-hybrid interactions reported in BioGRID.
+- `BioGRID_APMS.txt` - all unique affinity capture-MS interactions reported in BioGRID.
+
+These and all networks are available in the [Bio331 Dataset GitHub Repo](https://github.com/Reed-CompBio/BIO331-F20-Datasets/tree/master/yeast-interactomes). Download these interactomes and place them in the same directory as your code.
+
+Next, modify your code to generate statistics from Tasks B-E and generate the relevant figures. Remember to keep your code to run the example graphs around (comment it out), and refer to _Code Structure Suggestion 1_ for ideas to structure your code.
+
 ## :star: **Task G**: Compare Measures Across Yeast, Human, and Fly interactomes
+
+Generate the plots in Tasks B-E for the following three networks.  These networks are all available in the Dataset GitHub Repo, in the locations linked below.
+- [`BioGRID_physical.txt`](https://github.com/Reed-CompBio/BIO331-F20-Datasets/tree/master/yeast-interactomes) - all unique yeast physical interactions reported in BioGRID.
+- [`Human_HIPPIE.txt`](https://github.com/Reed-CompBio/BIO331-F20-Datasets/tree/master/human-interactomes) - a human interactome (from the [HIPPIE Database](http://cbdm-01.zdv.uni-mainz.de/~mschaefer/hippie/))
+- [`Fly.txt`](https://github.com/Reed-CompBio/BIO331-F20-Datasets/tree/master/fly-interactomes) - a fly interactome generated by Anna and Derek for this class's project.
+
+Download these interactomes and place them in the same directory as your code. Modify your code to generate statistics from Tasks B-D and generate the relevant figures.
+
+**Optional**: Task E, computing path lengths for all nodes, may take a long time for large networks. You do not need to complete Task E for this comparison.  However, if you do, you can calculate the histogram of the first 100,000 paths for every network to get a sense of the differences.
 
 ## Submitting
 
-:star2: **You're Done with Tasks A-G!** You just need to submit your python code (not the networks).  Before you submit `run.py` via Moodle, look through the comments and add any additional ones that explain what your code does.  Code organization and clarity will contribute few points in grading.
+:star2: **You're Done with Tasks A-G!** You just need to submit your python code (not the network or figure files).  Before you submit `run.py` via Moodle, look through the comments and add any additional ones that explain what your code does.  Include comments that describe how to run all three examples (the example networks, the yeast interactomes, and the multi-species comparison). Code organization and clarity will contribute few points in grading.
 
 ### Instructions for resubmitting
 
