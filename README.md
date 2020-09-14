@@ -1,11 +1,13 @@
 # Module 2: Interactome Properties
 
-In this homework, you will first implement network measures, then compare these measures across different yeast interactomes, and finally compare these measures across interactomes from yeast, human, and fly.  All graphs are undirected and unweighted.  Note that the Written Assignment asks you to compare interactomes and provide figures.
+In this homework, you will first implement network measures, then compare these measures across different yeast interactomes, and finally compare these measures across interactomes from yeast, human, and fly.  All graphs are undirected and unweighted.  
 
 * **Assignment Out:** Monday, Sept 14
 * **Assignment Due:** Monday, Sept 28
 
 ### Suggested Deadlines
+
+The Written Assignment asks you to compare interactomes by providing figures from Task F, so it is important to work through much of this assignment in the first week of the module.  There is a lot in this assignment - make your program as complete as you can over the next two weeks.
 
 :arrow_right: Friday, Sept 18 -- implement most of the network measures
 
@@ -75,11 +77,9 @@ _Code Structure Suggestion 2_:
 
 You will be calculating histograms for many of these tasks.  For each measure, suppose you have a dictionary of (key,value) pairs where the keys are the nodes and the values are the statistic (here, degree distribution of that node).  You can write a `generate_hist()` function to take a dictionary like this and returns the lists `x` and `y` that are passed to `plt.plot()` functions.
 
-:question: The two randomly-generated graphs look like the following. Can you determine which is `graph1.txt` and which is `graph2.txt`?  
+:question: The two randomly-generated graphs look like the following. Unsure if your code is working for Tasks B-E?  The solution for the example graphs is shown in the Written Assignment.
 
 ![random graphs](figs/random-graphs.png)
-
-:question: Unsure if your code is working for Tasks B-E?  The solution for the example graphs is shown in the Written Assignment.
 
 ## :star: **Task C**: Calculate and Plot (Average) Average Neighbor Degree
 
@@ -132,6 +132,8 @@ plt.xlim([0,150])
 ```
 
 :question: Does your degree distribution look similar across all networks? Try plotting the log-transformed plot. Look to the code in `plot_graph.py` for details.
+
+:question: Your code may take a few minutes to run (the Shortest Paths for all node pairs is time-intensive).  If your code takes more than 10 minutes to run, you can drop plotting this curve for the BioGRID datasets.  See the optional task below for another way to get around this issue.
 
 ## :star: **Task G**: Compare Measures Across Yeast, Human, and Fly interactomes
 
