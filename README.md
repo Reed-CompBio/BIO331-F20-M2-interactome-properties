@@ -75,10 +75,11 @@ _Code Structure Suggestion 2_:
 
 You will be calculating histograms for many of these tasks.  For each measure, suppose you have a dictionary of (key,value) pairs where the keys are the nodes and the values are the statistic (here, degree distribution of that node).  You can write a `generate_hist()` function to take a dictionary like this and returns the lists `x` and `y` that are passed to `plt.plot()` functions.
 
-:question: The two randomly-generated graphs (with their degrees) look like the following, however you will have a line plot instead of a bar chart in your code. Can you determine which is `graph1.txt` and which is `graph2.txt`?
+:question: The two randomly-generated graphs look like the following. Can you determine which is `graph1.txt` and which is `graph2.txt`?  
 
-![random graph](figs/random-graph.png)
-![pref attachment](figs/pref-attach.png)
+![random graphs](figs/random-graphs.png)
+
+:question: Unsure if your code is working for Tasks B-E?  The solution for the example graphs is shown in the Written Assignment.
 
 ## :star: **Task C**: Calculate and Plot (Average) Average Neighbor Degree
 
@@ -108,6 +109,8 @@ Next, plot the **average** CC for each degree `k`. The x-axis contains the degre
 
 Calculate the shortest path lengths between all pairs of nodes in each network, and plot a histogram of these path lengths.  The x-axis contains the path length `l` and the y-axis contains the number of node pairs that are connected by a path of length `l`.  Note that in this histogram we are counting _pairs_ of nodes, rather than nodes.
 
+:question: What happens if two nodes are not connected?  Their distance is infinite! Ignore these node pairs in your counts.
+
 ## :star: **Task F**: Compare Measures Across Yeast interactomes
 
 For the next two tasks, you will generate figures for different groups of interactomes.  Your code should be able to reproduce the figures for the example graphs, Task F, and Task G by uncommenting certain lines in your program. Add comments that describe how to run all three examples.
@@ -122,6 +125,13 @@ Generate the plots in Tasks B-E for the following five yeast networks.  The firs
 These and all networks are available in the [Bio331 Dataset GitHub Repo](https://github.com/Reed-CompBio/BIO331-F20-Datasets/tree/master/yeast-interactomes). Download these interactomes and place them in the same directory as your code.
 
 Next, modify your code to generate statistics from Tasks B-E and generate the relevant figures. Remember to keep your code to run the example graphs around (comment it out), and refer to _Code Structure Suggestion 1_ for ideas to structure your code.
+
+:question: Do your plots look all scrunched up?  That's because one of the datasets is much larger than the others. Try changing the x-axis limit with the following command (which restricts the range to be from 0-150):
+```
+plt.xlim([0,150])
+```
+
+:question: Does your degree distribution look similar across all networks? Try plotting the log-transformed plot. Look to the code in `plot_graph.py` for details.
 
 ## :star: **Task G**: Compare Measures Across Yeast, Human, and Fly interactomes
 
