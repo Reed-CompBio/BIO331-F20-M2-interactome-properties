@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt  # put at the top of file
 import math                      # put at the top of file, for the "Log" calculation
 
 def main():
-    plot_some_numbers()
-    return
+	plot_some_numbers()
+	return
 
 def plot_some_numbers():
 	fig = plt.figure(figsize=(6.5,4))  # make a 6.5" wide by 4" tall figure.
@@ -19,16 +19,17 @@ def plot_some_numbers():
 	plt.title('Some Numbers')
 
 	plt.subplot(1,2,2)                # in a 1-by-2 grid, 2nd subplot
-	plt.plot(logx,logy,'s-b')         # plot a blue line with squares
+	plt.plot(logx,logy,'s-b',label='example legend')         # plot a blue line with squares
+	plt.legend()
 	plt.xlabel('log x')
 	plt.ylabel('log y')
 	plt.title('Some Numbers (log)')
 
 	plt.tight_layout()                # make the labels  "snap" to the grid.
-	                                  # this may emit a warning, which is OK
+									  # this may emit a warning, which is OK
 	plt.savefig('numbers.png')        # save figure as PNG
 	print('wrote to numbers.png')
 	return
 
 if __name__ == '__main__':
-    main()
+	main()

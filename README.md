@@ -47,7 +47,7 @@ Write your code in the `run.py` file, copying functions from `plot_graph.py` as 
 
 Tasks F-G will ask you to run your code on other files of the same format, so consider this when writing your code for the earlier tasks. **Before you start each task, think carefully about what you need for the calculation and break the task down into smaller steps if necessary.**
 
-First, write a `read_edge_file()` function that takes a filename (as a string) and returns an edge list (and any other data structures you find useful, like an adjacency matrix or an adjacency list).  For each network, print the number of nodes `n`, the number of edges `m`, and the average node degree of the network: `2m/n`.
+First, write a `read_edge_file()` function that takes a filename (as a string) and returns an edge list (and any other data structures - an **adjacency list** will be useful).  For each network, print the number of nodes `n`, the number of edges `m`, and the average node degree of the network: `2m/n`.
 
 Next, calculate and plot the degree distribution. This is a **histogram** of node degrees for each network, where the x-axis contains the degree `k` and the y-axis contains the number of nodes that have degree `k`.  Use the `plt.plot()` function from `matplotlib`, so think first about what your `x` and `y` lists should look like.  You can plot multiple lines on the same figure by calling `plt.plot()` multiple times:
 ```
@@ -61,8 +61,8 @@ You will be running the same functions on multiple files and plotting all data o
 
 ```
 def main():
-  names = ['Example1','Example2']
-  files = ['example1.txt','example2.txt']
+  names = ['Graph1','Graph2']
+  files = ['graph1.txt','graph2.txt']
 
   for i in range(len(names)):
     print('DATASET:',names[i])
@@ -74,6 +74,11 @@ def main():
 _Code Structure Suggestion 2_:
 
 You will be calculating histograms for many of these tasks.  For each measure, suppose you have a dictionary of (key,value) pairs where the keys are the nodes and the values are the statistic (here, degree distribution of that node).  You can write a `generate_hist()` function to take a dictionary like this and returns the lists `x` and `y` that are passed to `plt.plot()` functions.
+
+:question: The two randomly-generated graphs (with their degrees) look like the following, however you will have a line plot instead of a bar chart in your code. Can you determine which is `graph1.txt` and which is `graph2.txt`?
+
+![random graph](figs/random-graph.png)
+![pref attachment](figs/pref-attach.png)
 
 ## :star: **Task C**: Calculate and Plot (Average) Average Neighbor Degree
 
@@ -92,6 +97,8 @@ First, compute the clustering coefficient (CC) for each node <img src="https://r
 <img src="https://render.githubusercontent.com/render/math?math=\huge \frac{2 E_v}{d_v(d_v-1)},">
 
 where <img src="https://render.githubusercontent.com/render/math?math=d_v"> is the degree of node <img src="https://render.githubusercontent.com/render/math?math=v"> and <img src="https://render.githubusercontent.com/render/math?math=E_v"> is the number of edges between <img src="https://render.githubusercontent.com/render/math?math=v">'s neighbors.
+
+:question: What happens when a node has degree 1?  The denominator becomes 0, and the clustering coefficient is undefined! In this case, set CC to 0.  Since we're working with edge lists, there will never be a node degree 0.
 
 Next, plot the **average** CC for each degree `k`. The x-axis contains the degree `k` and the y-axis contains the average CC value for all nodes with degree `k`.  There should be a single y-value for each x-value plotted.
 
