@@ -13,6 +13,12 @@ The Written Assignment asks you to compare interactomes by providing figures fro
 
 :arrow_right: Monday, Sept 21 -- compare measures across yeast interactomes
 
+### Tips & Info (last updated 9/22)
+
+1. Part I of the written assignment contains the distributions for the example graphs! Take advantage of that.
+2. Further, for one of the graphs the average clustering coefficient is zero across the board.  So if you're getting all zeros, it still might be correct.
+3. Finally, if you get the code to be exactly the way you want it for the example graphs, make a copy of that file. **You can submit multiple files for the assignment** (e.g. `examplegraphs.py` and `yeastgraphs.py`). Once you have the example graphs working, you want to modify the copied file to handle more than two networks (see the suggestion about code structure).
+
 ## :star: **Task A**: `matplotlib` Preliminaries
 
 `Matplotlib` is a plotting and visualization library for Python.  The `plot_graph.py` file contains a single function, which plots some numbers.  To see if you have it installed on your machine, try running `plot_graph.py`.  If it is not installed, try installing it in the same way you installed `graphspace_python`.  For example, you can open a Terminal (Mac) or Anaconda Command Prompt (for those using Anaconda as the package manager) and type:
