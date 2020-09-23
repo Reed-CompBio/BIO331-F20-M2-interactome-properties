@@ -152,7 +152,7 @@ Download these interactomes and place them in the same directory as your code. M
 
 ## Submitting
 
-:star2: **You're Done with Tasks A-F!** You just need to submit your python code (not the network or figure files).  Before you submit `run.py` via Moodle, look through the comments and add any additional ones that explain what your code does.  Include comments that describe how to run all three examples (the example networks, the yeast interactomes, and the multi-species comparison). Code organization and clarity will contribute few points in grading.
+:star2: **You're Done with Tasks A-F!** You just need to submit your python code (not the network or figure files).  Before you submit `run.py` via Moodle, look through the comments and add any additional ones that explain what your code does.  Include comments that describe how to run all parts of the code. Code organization and clarity will contribute few points in grading.
 
 ### Instructions for resubmitting
 
